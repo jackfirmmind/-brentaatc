@@ -19,15 +19,15 @@ Replace `[LINK]` with the live link to the tool once it's hosted (see README).
 >
 > Here's how it gets you business:
 >
-> • **Every completion is a lead.** They enter their name and email to unlock the full results, so you're getting real people with a live vacancy, not just website visitors.
-> • **They brief you before you've spoken.** At the end, one button opens an email to you with their whole brief already filled in: role, level, budget, start date, non-negotiables and what they're worried about. No long intake call. You go into the first conversation already knowing what they need.
+> • **They come to you already briefed.** At the end, one button opens an email to you with their whole brief filled in: role, level, budget, start date, non-negotiables and what they're worried about. No long intake call. You go into the first conversation already knowing what they need.
+> • **They get real value first.** The free report shows them exactly where their hire could go wrong, so when they press send they already trust you and know what they need help with.
 > • **It's built around what keeps employers up at night.** Not knowing exactly who they need, hiring the wrong person, and the search dragging on. Every result answers one of those, and every result points them back to you.
 > • **It makes the case for inclusive hiring without preaching.** It shows that adjustments usually cost little or nothing and points out the EE and B-BBEE benefits, which fits right in with what AccessAbility stands for.
 > • **It's fully accessible itself.** It works by keyboard and screen reader, and the contrast and layout are accessibility-friendly, so it practises what you preach.
 >
 > Take it for a spin as if you were hiring. It takes about 4 minutes and you'll see exactly what your clients will see. I've also written a short message you can send to your leads along with it.
 >
-> If you like it, I'll put your logo and colours on it, set it up so leads go straight to your inbox or a spreadsheet, and we can host it on your own site.
+> If you like it, I can put your logo and colours on it and we can move it onto your own site.
 >
 > Keen to hear what you think!
 

@@ -451,7 +451,7 @@
   var CONFIG = {
     agencyName: 'AccessAbility Talent Connect',
     contactName: 'Brent',                               // first name shown on the "send" button
-    agencyEmail: 'brent@accessabilitytalentconnect.com', // CONFIRM: where "Send my blueprint" emails go
+    agencyEmail: 'info@AccessAbilityTalentConnect.com', // where "Send my blueprint" emails go
     region: 'ZA',            // 'ZA' shows Employment Equity / B-BBEE notes. Set '' to hide them.
     locale: 'en-ZA',
     currency: 'R',
@@ -463,11 +463,7 @@
       { v: 'b4', l: 'R50 000 – R80 000', s: 'R50k–R80k/mo', mid: 65000 },
       { v: 'b5', l: 'R80 000 or more', s: 'R80k+/mo', mid: 95000 },
       { v: 'unset', l: 'Not decided yet', s: 'Not set yet', mid: 0 }
-    ],
-    // Optional lead capture. Paste a Zapier / Make / n8n / Formspree / Google Apps Script
-    // webhook URL here and every unlock + "send" click is posted to it (form-encoded).
-    // Leave empty and nothing ever leaves the visitor's browser.
-    leadWebhook: ''
+    ]
   };
 
   /* =====================================================================
@@ -1319,8 +1315,7 @@
 
   function gateHTML() {
     var L = store('rhb_lead') || {};
-    var note = CONFIG.leadWebhook ? 'By unlocking, you agree that ' + esc(CONFIG.agencyName) + ' may contact you about your hiring needs. We never share your details.' :
-      'We don’t store your details on this page. Your blueprint stays in your browser unless you choose to send it.';
+    var note = 'We don’t store your details on this page. Your blueprint stays in your browser unless you choose to send it.';
     return '<div class="gate" role="region" aria-labelledby="gate-title"><div class="gate-lock">' + ICON.lock + '</div>' +
       '<h2 id="gate-title">Unlock your full blueprint</h2><ul>' +
       ['Your ideal-candidate profile and hire readiness score', 'What this vacancy is costing you each month', 'Your watch-outs, each with a fix', 'Interview cheat-sheet, job ad opener and hiring plan']
@@ -1349,18 +1344,6 @@
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
 
-  function postLead(event) {
-    if (!CONFIG.leadWebhook) return;
-    var r = state.result, a = r.a, L = state.lead || {};
-    var data = new URLSearchParams({
-      event: event, ref: r.ref, name: L.name || '', email: L.email || '', company: L.company || '',
-      role: state.answers.role, level: short('level', a.level), profile: r.arch.name,
-      clarity: r.clarity, misHireRisk: r.risk, pressure: r.pressure, start: short('start', a.start), budget: short('budget', a.budget),
-      worry: short('worry', a.worry), summary: emailBody(), submittedAt: new Date().toISOString(), page: location.href
-    });
-    try { fetch(CONFIG.leadWebhook, { method: 'POST', mode: 'no-cors', body: data, keepalive: true }).catch(function () {}); } catch (e) {}
-  }
-
   function bindResults() {
     var gf = $('#gate-form');
     if (gf) gf.addEventListener('submit', function (e) {
@@ -1371,7 +1354,6 @@
       state.lead = { name: name.slice(0, 60), email: email.slice(0, 120), company: company.slice(0, 80) };
       store('rhb_lead', state.lead);
       state.unlocked = true;
-      postLead('unlocked');
       renderResults();
       $('#res-title').focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
@@ -1380,14 +1362,12 @@
     });
     if (!state.unlocked) return;
     setMailLinks();
-    ['#mail-btn', '#gmail-btn', '#outlook-btn'].forEach(function (s) { var el = $(s); if (el) el.addEventListener('click', function () { postLead('sent_to_agency'); }); });
     $$('[data-copy]').forEach(function (b) {
       b.addEventListener('click', function () {
         var isAd = b.getAttribute('data-copy') === 'ad';
         copyText(isAd ? adText(state.result.a) : emailSubject() + '\n\n' + emailBody().replace(/\r\n/g, '\n'), function () {
           toast(isAd ? 'Job ad opener copied.' : 'Summary copied. Paste it into an email to ' + CONFIG.agencyEmail);
         });
-        if (!isAd) postLead('copied_summary');
       });
     });
     var pb = $('[data-print]'); if (pb) pb.addEventListener('click', function () { window.print(); });
@@ -1440,9 +1420,7 @@
      ===================================================================== */
   $$('[data-cfg]').forEach(function (el) { el.textContent = CONFIG[el.getAttribute('data-cfg')]; });
   $('#year').textContent = new Date().getFullYear();
-  $('#privacy-note').textContent = CONFIG.leadWebhook ?
-    'When you unlock or send your blueprint, your details are shared with ' + CONFIG.agencyName + ' so we can help with your hire.' :
-    'Your answers stay in your browser. Nothing is sent anywhere unless you choose to email your blueprint.';
+  $('#privacy-note').textContent = 'Your answers stay in your browser. Nothing is sent anywhere unless you choose to email your blueprint.';
   if (pre.company) { var p = $('#prepared'); p.hidden = false; p.textContent = 'Prepared for ' + pre.company; }
   $('#gets-list').innerHTML = [
     'Your hiring profile: one of 15, with your edge and your trap',

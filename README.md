@@ -38,18 +38,17 @@ At the top of the `<script>` in `index.html`:
 ```js
 agencyName:  'AccessAbility Talent Connect',
 contactName: 'Brent',
-agencyEmail: 'brent@accessabilitytalentconnect.com', // ← confirm this
+agencyEmail: 'info@AccessAbilityTalentConnect.com',
 region:      'ZA',   // '' hides the EE / B-BBEE notes
 currency:    'R',
-budgets:     [...],  // salary bands and the midpoints used for the cost estimates
-leadWebhook: ''      // optional, see below
+budgets:     [...]   // salary bands and the midpoints used for the cost estimates
 ```
 
 Brand colours live in the `:root` CSS variables at the top of the file.
 
-## Optional: capture every lead automatically
+## Privacy
 
-Out of the box, nothing leaves the visitor's browser until they choose to email their blueprint. To capture every unlock (name, email, company, role, scores and the full summary) as well, create a webhook in Zapier, Make, n8n, Formspree or a Google Apps Script and paste its URL into `leadWebhook`. Each unlock, send and copy is then posted to it as a form. The privacy wording on the page updates automatically.
+The email gate only unlocks the results. Nothing is stored or sent anywhere: the agency only hears from an employer when they choose to email their blueprint.
 
 ## Hosting (any of these work)
 
